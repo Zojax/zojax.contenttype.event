@@ -1,0 +1,94 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   xmlns:browser="http://namespaces.zope.org/browser"
+   i18n_domain="zojax.contenttypes">
+
+  <permission
+     id="zojax.contenttype.AddEvent"
+     title="Add event"
+     description="Allow add new event to portal." />
+
+  <permission
+     id="zojax.contenttype.SubmitEvent"
+     title="Submit event"
+     description="Allow submit event to portal." />
+
+  <registerIn registry="zojax.product.zojax-contenttypes">
+    <zojax:content
+       title="Event"
+       name="contenttype.event"
+       class=".event.Event"
+       schema=".interfaces.IEvent"
+       contenttype=".interfaces.IEventType"
+       ctclass="zojax.content.draft.contenttype.DraftedContentType"
+       type="zojax.calendar.interfaces.IEventType
+	     zojax.content.type.interfaces.IActivePortalType
+	     zojax.content.space.interfaces.IContentSpaceType"
+       description="Information about an upcoming event, which can be displayed in the calendar."
+       permission="zojax.contenttype.AddEvent" />
+    
+    <class class=".event.Event">
+      <implements interface="zojax.ownership.interfaces.IOwnerAware" />
+      <implements interface="zojax.content.type.interfaces.IShareableContent" />
+      <implements interface="zojax.content.type.interfaces.ISearchableContent" />
+      <implements interface="zojax.content.type.interfaces.ITitleBasedName" />
+
+      <require
+	 permission="zope.View"
+	 interface=".interfaces.IEvent" />
+      
+      <require
+	 permission="zojax.ModifyContent"
+	 set_schema=".interfaces.IEvent" />
+    </class>
+    
+    <adapter factory=".event.SearchableText" />
+    
+    <browser:icon
+       name="zmi_icon"
+       for=".interfaces.IEvent"
+       file="event_icon.png" />
+    
+    <browser:icon
+       name="zmi_icon"
+       for=".interfaces.IEventType"
+       file="event_icon.png" />
+    
+    <zojax:pagelet
+       name="index.html"
+       for=".interfaces.IEvent"
+       template="view.pt"
+       provides="zojax.content.type.interfaces.IContentView"
+       permission="zope.View" />
+    
+    <!-- permissions -->
+    <zojax:permission
+       permission="zojax.contenttype.AddEvent"
+       category="zojax.content.permissions.interfaces.IAddPermission" />
+
+    <zojax:contentpermission
+       for="zojax.content.space.interfaces.IContentSpace"
+       contenttype="contenttype.event"
+       permission="zojax.contenttype.AddEvent"
+       managepermission="zojax.ManageContentPermission"
+       class="zojax.content.permissions.content.ContentPermission"
+       category="zojax.content.permissions.interfaces.IAddPermission" />
+    
+    <!-- draft support -->
+    <zojax:draft
+       content="contenttype.event"
+       publish="zojax.contenttype.AddEvent" />
+
+  </registerIn>
+
+  <!-- event capabilities -->
+  <include file="capability.zcml" />
+
+  <!-- generations -->
+  <utility
+     name="zojax.contenttype.event"
+     provides="zope.app.generations.interfaces.ISchemaManager"
+     component=".generations.schemaManager" />
+
+</configure>
