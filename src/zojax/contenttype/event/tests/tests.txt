@@ -1,0 +1,129 @@
+=====
+Event
+=====
+
+    >>> from zope import component, interface, event
+    >>> from zope.testbrowser.testing import Browser
+    >>> from zope.app.component.hooks import setSite
+    >>> from zope.lifecycleevent import ObjectCreatedEvent
+    >>> from zojax.content.space.content import ContentSpace
+
+    >>> root = getRootFolder()
+    >>> setSite(root)
+    >>> space = ContentSpace(title=u'Space')
+    >>> event.notify(ObjectCreatedEvent(space))
+    >>> root['space'] = space
+    >>> _t = root['intids'].register(root['space'])
+    >>> root['catalog'].updateIndexes()
+
+    >>> actor = Browser()
+    >>> actor.handleErrors = False
+    >>> actor.addHeader("Authorization", "Basic mgr:mgrpw")
+
+Install product
+
+    >>> actor.open("http://localhost/settings/")
+    >>> actor.getLink('Products management').click()
+    >>> actor.getControl(name='availproducts:list').value = [
+    ...     'zojax-contenttypes', 'zojax-calendar']
+    >>> actor.getControl(name='install').click()
+
+
+Add Event
+---------
+
+    >>> actor.open("http://localhost/space/context.html/contents/")
+    >>> actor.getLink('Event').click()
+
+    >>> actor.getControl('Title').value = u'Test news item'
+    >>> actor.getControl('Event Location').value = u'Kazakhstan, Almaty'
+    >>> actor.getControl('Event Starts').value = u'07/01/01 10:00'
+    >>> actor.getControl('Event Ends').value = u'07/10/01 10:00'
+    >>> actor.getControl('Event URL').value = u'http://zojax.net/'
+    >>> actor.getControl('Contact Name').value = u'Nikolay Kim'
+    >>> actor.getControl('Contact E-mail').value = u'fafhrd91@gmail.com'
+    >>> actor.getControl('Body').value = u'Test Event'
+    >>> actor.getControl('Short Name').value = 'event'
+    >>> actor.getControl('Publish').click()
+
+View
+----
+
+    >>> print actor.contents
+    <!DOCTYPE html...
+    ...
+    <table summary="Event details">
+       <tbody>
+          <tr>
+            <th>When</th>
+            <td>
+              Jan 01, 2007 10:00:00 AM
+              <span>to</span> <br />
+              Oct 01, 2007 10:00:00 AM
+    	    </td>
+          </tr>
+          <tr>
+            <th>Where</th>
+            <td>Kazakhstan, Almaty</td>
+          </tr>
+          <tr>
+            <th>Contact Name</th>
+            <td>Nikolay Kim</td>
+          </tr>
+          <tr>
+            <th>Contact E-mail</th>
+            <td>
+              <a href="emailto:fafhrd91@gmail.com">fafhrd91@gmail.com</a>
+            </td>
+          </tr>
+       </tbody>
+    </table>
+    ...
+    <div>Test Event</div>
+    ...
+    </html>
+
+
+Edit
+----
+
+    >>> actor.open("http://localhost/space/event/context.html")
+    >>> actor.getLink('Content').click()
+    >>> actor.getControl('Title').value = 'New event'
+    >>> actor.getControl(name="content.edit.buttons.save").click()
+
+
+Events portlet
+--------------
+
+we need install calendar product
+
+    >>> actor.open("http://localhost/space/portlet.html")
+    >>> print actor.contents
+    <!DOCTYPE html...
+    ...
+    ...<div class="z-portlet portlet-events">
+         <h2 class="z-portlet-header">Upcoming events</h2>
+           <div class="z-portlet-body">
+              <div class="z-portlet-item even">
+                <a href="http://localhost/space/event/" title="">New event</a>
+                <span class="z-portlet-item-details">
+    	          Kazakhstan, Almaty,<br />
+                  01/01/07 10:00 AM
+                </span>
+              </div>
+           </div>
+         </div>...
+    ...
+    </html>
+
+
+Unistall product
+----------------
+
+    >>> actor.open("http://localhost/settings/")
+    >>> actor.getLink('Products management').click()
+    >>> actor.getControl(name='products:list').value = [
+    ...     'zojax-contenttypes', 'zojax-calendar']
+    >>> actor.getControl(name='uninstall').click()
+    >>> setSite(None)
