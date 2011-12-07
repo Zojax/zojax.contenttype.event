@@ -1,4 +1,4 @@
-<div class="z-contenttypes-eventDetails" i18n:domain="zojax.contenttypes">
+<div class="z-contenttypes-eventDetails" i18n:domain="zojax.contenttype.event">
   <table summary="Event details" i18n:attributes="summary">
     <tbody>
       <tr>
