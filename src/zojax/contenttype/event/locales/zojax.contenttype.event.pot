@@ -1,0 +1,105 @@
+##############################################################################
+#
+# Copyright (c) 2003-2004 Zope Corporation and Contributors.
+# All Rights Reserved.
+#
+# This software is subject to the provisions of the Zope Public License,
+# Version 2.1 (ZPL).  A copy of the ZPL should accompany this distribution.
+# THIS SOFTWARE IS PROVIDED "AS IS" AND ANY AND ALL EXPRESS OR IMPLIED
+# WARRANTIES ARE DISCLAIMED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF TITLE, MERCHANTABILITY, AGAINST INFRINGEMENT, AND FITNESS
+# FOR A PARTICULAR PURPOSE.
+#
+##############################################################################
+msgid ""
+msgstr ""
+"Project-Id-Version: Development/Unknown\n"
+"POT-Creation-Date: Thu Dec  8 22:43:20 2011\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Zope 3 Developers <zope3-dev@zope.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: zope/app/locales/extract.py\n"
+
+#: src/zojax/contenttype/event/configure.zcml:12
+msgid "Submit event"
+msgstr ""
+
+#: src/zojax/contenttype/event/configure.zcml:12
+msgid "Allow submit event to portal."
+msgstr ""
+
+#: src/zojax/contenttype/event/configure.zcml:18
+msgid "Event"
+msgstr ""
+
+#: src/zojax/contenttype/event/configure.zcml:18
+msgid "Information about an upcoming event, which can be displayed in the calendar."
+msgstr ""
+
+#: src/zojax/contenttype/event/configure.zcml:7
+msgid "Add event"
+msgstr ""
+
+#: src/zojax/contenttype/event/configure.zcml:7
+msgid "Allow add new event to portal."
+msgstr ""
+
+#: src/zojax/contenttype/event/interfaces.py:30
+#: src/zojax/contenttype/event/view.pt:33
+msgid "Attendees"
+msgstr ""
+
+#: src/zojax/contenttype/event/interfaces.py:35
+msgid "Event URL"
+msgstr ""
+
+#: src/zojax/contenttype/event/interfaces.py:36
+msgid "Web address with more info about the event."
+msgstr ""
+
+#: src/zojax/contenttype/event/interfaces.py:40
+#: src/zojax/contenttype/event/view.pt:17
+msgid "Contact Name"
+msgstr ""
+
+#: src/zojax/contenttype/event/interfaces.py:44
+#: src/zojax/contenttype/event/view.pt:22
+msgid "Contact E-mail"
+msgstr ""
+
+#: src/zojax/contenttype/event/interfaces.py:48
+#: src/zojax/contenttype/event/view.pt:29
+msgid "Contact Phone"
+msgstr ""
+
+#: src/zojax/contenttype/event/interfaces.py:52
+msgid "Body"
+msgstr ""
+
+#: src/zojax/contenttype/event/interfaces.py:53
+msgid "Event body text."
+msgstr ""
+
+#: src/zojax/contenttype/event/view.pt:13
+msgid "Where"
+msgstr ""
+
+#: src/zojax/contenttype/event/view.pt:2
+msgid "Event details"
+msgstr ""
+
+#: src/zojax/contenttype/event/view.pt:5
+msgid "When"
+msgstr ""
+
+#: src/zojax/contenttype/event/view.pt:51
+msgid "More information about this event&hellip;"
+msgstr ""
+
+#: src/zojax/contenttype/event/view.pt:8
+msgid "to"
+msgstr ""
+
