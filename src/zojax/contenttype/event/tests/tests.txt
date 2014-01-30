@@ -37,8 +37,8 @@ Add Event
 
     >>> actor.getControl('Title').value = u'Test news item'
     >>> actor.getControl('Event Location').value = u'Kazakhstan, Almaty'
-    >>> actor.getControl('Event Starts').value = u'07/01/01 10:00'
-    >>> actor.getControl('Event Ends').value = u'07/10/01 10:00'
+    >>> actor.getControl('Event Starts').value = u'07/01/15 10:00 AM'
+    >>> actor.getControl('Event Ends').value = u'07/10/15 10:00 AM'
     >>> actor.getControl('Event URL').value = u'http://zojax.net/'
     >>> actor.getControl('Contact Name').value = u'Nikolay Kim'
     >>> actor.getControl('Contact E-mail').value = u'fafhrd91@gmail.com'
@@ -50,17 +50,17 @@ View
 ----
 
     >>> print actor.contents
-    <!DOCTYPE html...
+    <!DOCTYPE html PUBLIC ...
     ...
-    <table summary="Event details">
-       <tbody>
+      <table summary="Event details">
+        <tbody>
           <tr>
             <th>When</th>
             <td>
-              Jan 01, 2007 10:00:00 AM
+              <span class="zojax-formatter-datetime" value="July 01, 2015 10:00:00 -0800" format="medium" offset="-480">Jul 01, 2015 10:00:00 AM</span>
               <span>to</span> <br />
-              Oct 01, 2007 10:00:00 AM
-    	    </td>
+              <span class="zojax-formatter-datetime" value="July 10, 2015 10:00:00 -0800" format="medium" offset="-480">Jul 10, 2015 10:00:00 AM</span>
+    	</td>
           </tr>
           <tr>
             <th>Where</th>
@@ -76,13 +76,14 @@ View
               <a href="emailto:fafhrd91@gmail.com">fafhrd91@gmail.com</a>
             </td>
           </tr>
-       </tbody>
-    </table>
+    <BLANKLINE>
+    <BLANKLINE>
+        </tbody>
+      </table>
     ...
-    <div>Test Event</div>
+      <div>Test Event</div>
     ...
     </html>
-
 
 Edit
 ----
@@ -102,20 +103,19 @@ we need install calendar product
     >>> print actor.contents
     <!DOCTYPE html...
     ...
-    ...<div class="z-portlet portlet-events">
-         <h2 class="z-portlet-header">Upcoming events</h2>
-           <div class="z-portlet-body">
-              <div class="z-portlet-item even">
-                <a href="http://localhost/space/event/" title="">New event</a>
-                <span class="z-portlet-item-details">
-    	          Kazakhstan, Almaty,<br />
-                  01/01/07 10:00 AM
-                </span>
-              </div>
-           </div>
-         </div>...
+      <h2 class="z-portlet-header">Upcoming events</h2>
+      <div class="z-portlet-body">
+        <div class="z-portlet-item even">
+          <a href="http://localhost/space/event/" title="">New event</a>
+          <span class="z-portlet-item-details">
+            Kazakhstan, Almaty, <br />
+            <span class="zojax-formatter-datetime" value="July 01, 2015 10:00:00 -0800" format="short" offset="-480">07/01/15 10:00 AM</span>
+          </span>
+        </div>
+      </div>
     ...
     </html>
+
 
 
 Unistall product
