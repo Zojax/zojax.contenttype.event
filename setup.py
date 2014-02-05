@@ -63,6 +63,7 @@ setup(name = 'zojax.contenttype.event',
                           'zojax.calendar',
                           ],
       extras_require = dict(test=['zope.app.zcmlfiles',
+                                  'zc.catalog',
                                   'zojax.calendar',
                                   'zojax.contenttypes [test]']),
 
